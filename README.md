@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 Project qflib
 ===============
 1-Jan-2026
 
 This repository contains the source code for the `qflib` quant library and its interfaces.
+=======
+Project qflib
+===============
+1-Jan-2026
+
+This repository contains the source code for the `qflib` quant library and its interfaces.
+>>>>>>> origin/yuyang-branch
