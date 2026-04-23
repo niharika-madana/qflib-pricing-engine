@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # pyproject.toml
 
 [build-system]
@@ -39,3 +40,24 @@ where = ["."]
 [tool.setuptools.package-data]
 qflib = ["*.pyd", "*.so"]
 >>>>>>> origin/yuyang-branch
+=======
+# pyproject.toml
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qflib"
+version = "1.0.0"
+description = "qflib quant library"
+maintainers = [{name = "Michael G Sotiropoulos", email = "msotiropoulos@fordham.edu"}]
+dependencies = ["numpy"]
+license = {text = "Proprietary"}
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.setuptools.package-data]
+qflib = ["*.pyd", "*.so"]
+>>>>>>> origin/fangyi-branch
