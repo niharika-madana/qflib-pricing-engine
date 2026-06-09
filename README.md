@@ -40,15 +40,6 @@ A C++20 quantitative finance library with Python bindings for pricing derivative
 ## Directory Structure
 
 ```
-<<<<<<< HEAD
-qflib-1.1.0/
-├── qflib/                    # Core C++ library (compiled to static library)
-│   ├── market/               # YieldCurve, VolatilityTermStructure, Market singleton
-│   ├── math/
-│   │   ├── interpol/         # PiecewisePolynomial
-│   │   ├── linalg/           # Cholesky, eigenvalues, spectral truncation
-│   │   ├── optim/            # Root finding (zbrak, rtsec), PolyFunc
-=======
 qflib-1.2.0/
 ├── qflib/                    # Core C++ library (compiled to static library)
 │   ├── market/               # YieldCurve, VolatilityTermStructure, VolatilitySurface, Market singleton
@@ -56,30 +47,21 @@ qflib-1.2.0/
 │   │   ├── interpol/         # PiecewisePolynomial
 │   │   ├── linalg/           # Cholesky, eigenvalues, spectral truncation
 │   │   ├── optim/            # Root finding (zbrak, rtsec), PolyFunc, Gauss-Newton
->>>>>>> f4dbf94 (v1.2.0: add implied vol, Heston model, and vol surface)
 │   │   ├── random/           # NormalRng template, RNG type aliases
 │   │   └── stats/            # NormalDistribution, ErrorFunction, MeanVarCalculator
 │   ├── methods/
 │   │   ├── montecarlo/       # PathGenerator, EulerPathGenerator, AntitheticPathGenerator
 │   │   └── pde/              # Pde1DSolver, TridiagonalOp1D, PdeGrid
-<<<<<<< HEAD
-│   ├── pricers/              # BsMcPricer, MultiAssetBsMcPricer, BsMcQuantoPricer, simplepricers
-=======
 │   ├── pricers/              # BsMcPricer, MultiAssetBsMcPricer, BsMcQuantoPricer, simplepricers,
 │   │                         # impliedvol, heston
->>>>>>> f4dbf94 (v1.2.0: add implied vol, Heston model, and vol surface)
 │   └── products/             # EuropeanCallPut, DigitalCallPut, AmericanCallPut, AsianBasketCallPut, ...
 ├── pyqflib/                  # Python bindings (compiled to .pyd / .so)
 │   ├── qflib/                # Python package (importable as `import qflib as qf`)
 │   └── pyfunctions*.hpp      # C++-side Python callable implementations
 ├── examples/
 │   └── Python/
-<<<<<<< HEAD
-│       └── qflib-examples.py # Runnable examples for all pricing functions
-=======
 │       ├── 01_quantooption_pricing.ipynb
 │       └── 03_volsurface_heston.ipynb
->>>>>>> f4dbf94 (v1.2.0: add implied vol, Heston model, and vol surface)
 ├── lib/                      # Compiled output
 └── CMakeLists.txt
 ```
@@ -211,8 +193,6 @@ pdeparams = {
 
 Returns a dict with key `Price`.
 
-<<<<<<< HEAD
-=======
 ### Implied Volatility and Heston Model
 
 #### Implied volatility
@@ -244,7 +224,6 @@ Heston parameters: `v0` initial variance, `kappa` mean-reversion speed, `theta` 
 
 `vols` is a 2D array of shape `(len(strikes), len(mats))`. Vol surfaces are stored in the market singleton alongside yield curves.
 
->>>>>>> f4dbf94 (v1.2.0: add implied vol, Heston model, and vol surface)
 ---
 
 ## Usage Examples
@@ -314,8 +293,6 @@ result = qf.asianBasketBSMC(
 print(f"Price={result['Mean']:.4f}  StdErr={result['StdErr']:.4f}")
 ```
 
-<<<<<<< HEAD
-=======
 ### Implied vol and Heston calibration
 
 ```python
@@ -339,7 +316,6 @@ fit = qf.hestonCalibrate(vols, strikes, mats, 100, 0.05, 0.02,
 print(fit)  # {'V0': ..., 'Kappa': ..., 'Theta': ..., 'Xi': ..., 'Rho': ...}
 ```
 
->>>>>>> f4dbf94 (v1.2.0: add implied vol, Heston model, and vol surface)
 ### PDE pricing — European and American
 
 ```python
@@ -367,10 +343,7 @@ print(f"American PDE: {amer['Price']:.4f}")
 |---|---|---|
 | `YieldCurve` | `qflib/market/yieldcurve.hpp` | Discount factors and rates from bootstrapped curve |
 | `VolatilityTermStructure` | `qflib/market/volatilitytermstructure.hpp` | Spot/forward volatility queries |
-<<<<<<< HEAD
-=======
 | `VolatilitySurface` | `qflib/market/volsurface.hpp` | 2D implied vol surface with bilinear interpolation |
->>>>>>> f4dbf94 (v1.2.0: add implied vol, Heston model, and vol surface)
 | `Market` | `qflib/market/market.hpp` | Singleton registry for market objects |
 | `EuropeanCallPut` | `qflib/products/europeancallput.hpp` | European payoff |
 | `AmericanCallPut` | `qflib/products/americancallput.hpp` | American payoff with daily fixings |
@@ -379,11 +352,8 @@ print(f"American PDE: {amer['Price']:.4f}")
 | `BsMcPricer` | `qflib/pricers/bsmcpricer.hpp` | Single-asset Black-Scholes MC pricer |
 | `MultiAssetBsMcPricer` | `qflib/pricers/multiassetbsmcpricer.hpp` | Multi-asset correlated MC pricer |
 | `BsMcQuantoPricer` | `qflib/pricers/bsmcquantopricer.hpp` | Quanto option MC pricer |
-<<<<<<< HEAD
-=======
 | `HestonParams` / `hestonCall` | `qflib/pricers/heston.hpp` | Heston pricing and calibration |
 | `impliedVol` | `qflib/pricers/impliedvol.hpp` | Newton-Raphson BS implied vol solver |
->>>>>>> f4dbf94 (v1.2.0: add implied vol, Heston model, and vol surface)
 | `EulerPathGenerator` | `qflib/methods/montecarlo/eulerpathgenerator.hpp` | Euler-scheme path generator template |
 | `AntitheticPathGenerator` | `qflib/methods/montecarlo/antitheticpathgenerator.hpp` | Antithetic variance reduction |
 | `Pde1DSolver` | `qflib/methods/pde/pde1dsolver.hpp` | 1D finite difference backwards induction solver |
