@@ -1,6 +1,41 @@
 QFLIB Release Notes
 ====================
 
+VERSION 1.1.0
+--------------
+
+### Additions
+
+1. New files `qflib/pricers/bsmcquantopricer.hpp` and `bsmcquantopricer.cpp`.  
+   Definition of the class `BsMcQuantoPricer`.  
+   Prices a quanto option via Black-Scholes Monte Carlo, accounting for FX volatility and asset–FX correlation in the drift adjustment.
+
+2. In files `qflib/pricers/simplepricers.hpp` and `simplepricers.cpp`.  
+   Added the following analytical pricing functions:  
+   - `quantoEuropeanOptionBS` — Black-Scholes price of a quanto European option.
+
+3. In files `qflib/methods/pde/pdebase.hpp`, `pdebase.cpp`, and `pde1dsolver.hpp`.  
+   Extended the PDE infrastructure to support a quanto drift adjustment in the 1D solver.
+
+4. In file `pyqflib/pyfunctions1.hpp`.  
+   Added definition of function `pyQfQEuroBS`.  
+   Implements analytical Black-Scholes pricing for quanto European options.
+
+5. In file `pyqflib/pyfunctions3.hpp`.  
+   Added definitions of functions `pyQfQEuroBSMC`.  
+   Implement MC pricing for quanto European options.
+
+6. In file `pyqflib/pyfunctions4.hpp`.  
+   Added definition of function `pyQfQuantoEuroBSPDE`.  
+   Implements PDE pricing for quanto European options.
+
+7. In files `pyqflib/pymodule.cpp` and `pyqflib/qflib/__init__.py`.  
+   Registered the following new Python callable functions:  
+   - `qf.qEuroBS` — analytical Black-Scholes price of a quanto European option  
+   - `qf.qEuroBSMC` — MC price of a quanto European option  
+   - `qf.qEuroBSPDE` — PDE price of a quanto European option  
+
+
 VERSION 1.0.0
 --------------
 
