@@ -10,6 +10,7 @@
 #include "pyfunctions2.hpp"
 #include "pyfunctions3.hpp"
 #include "pyfunctions4.hpp"
+#include "pyfunctions5.hpp"
 
 static PyMethodDef PyQflibMethods[] = 
 {
@@ -77,6 +78,15 @@ static PyMethodDef PyQflibMethods[] =
   { "digiBSPDE", pyQfDigiBSPDE, METH_VARARGS, "price of a digital option in the Black-Scholes model using PDE." },
   { "qEuroBSPDE", pyQfQuantoEuroBSPDE, METH_VARARGS, "price of a quanto European option in the Black-Scholes model using PDE." },
   { "amerBSPDE", pyQfAmerBSPDE, METH_VARARGS, "price of an American option in the Black-Scholes model using PDE." },
+  // functions 5
+  { "impliedVol",       pyQfImpliedVol,      METH_VARARGS, "implied BS volatility from a European option market price." },
+  { "hestonCall",       pyQfHestonCall,      METH_VARARGS, "European call price in the Heston model." },
+  { "hestonVol",        pyQfHestonVol,       METH_VARARGS, "BS implied vol corresponding to a Heston price." },
+  { "hestonCalibrate",  pyQfHestonCalibrate, METH_VARARGS, "calibrate Heston params to a market vol surface." },
+  { "vsCreate",         pyQfVSCreate,        METH_VARARGS, "create a 2D implied vol surface." },
+  { "vsImpliedVol",     pyQfVSImpliedVol,    METH_VARARGS, "interpolated implied vol from a vol surface." },
+  { "vsTotalVar",       pyQfVSTotalVar,      METH_VARARGS, "total variance (sigma^2 * T) from a vol surface." },
+  { "vsAtmVol",         pyQfVSAtmVol,        METH_VARARGS, "ATM vol from a vol surface." },
   {NULL, NULL, 0, NULL}
 };
 

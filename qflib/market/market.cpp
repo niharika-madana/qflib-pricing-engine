@@ -18,6 +18,7 @@ void Market::clear()
 {
   ycmap_.clear();
   volmap_.clear();
+  vsmap_.clear();
 }
 
 // The helper function

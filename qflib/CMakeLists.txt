@@ -14,6 +14,9 @@ set(qflib_SOURCES
     market/market.cpp
     market/yieldcurve.cpp
     market/volatilitytermstructure.cpp
+    market/volsurface.cpp
+    pricers/impliedvol.cpp
+    pricers/heston.cpp
 )
 
 add_library(qflib STATIC ${qflib_SOURCES})

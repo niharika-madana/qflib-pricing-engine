@@ -1,6 +1,53 @@
 QFLIB Release Notes
 ====================
 
+VERSION 1.2.0
+--------------
+
+### Additions
+
+1. New files `qflib/pricers/impliedvol.hpp` and `impliedvol.cpp`.  
+   Implementation of `qf::impliedVol`.  
+
+2. New files `qflib/pricers/heston.hpp` and `heston.cpp`.  
+   Definition of `qf::HestonParams` and the following functions:  
+   - `hestonCall` — European call price via Gil-Pelaez characteristic-function inversion with composite Simpson quadrature  
+   - `hestonImpliedVol` — BS implied vol corresponding to a Heston price  
+   - `hestonCalibrate` — joint multi-maturity calibration of all five Heston parameters via Gauss-Newton with Levenberg-Marquardt damping
+
+3. New file `qflib/math/optim/gaussnewton.hpp`.  
+   Gauss-Newton optimizer with Levenberg-Marquardt damping, used by `hestonCalibrate`.
+
+4. New files `qflib/market/volsurface.hpp` and `volsurface.cpp`.  
+   Definition of class `VolatilitySurface`.  
+   Stores a 2D grid of implied vols (strikes × maturities) and provides bilinear interpolation, total variance, and ATM vol queries.
+
+5. In files `qflib/market/market.hpp` and `market.cpp`.  
+   Added `volSurfaces()` accessor to the `Market` singleton for storing and retrieving `VolatilitySurface` objects by name.
+
+6. New file `pyqflib/pyfunctions5.hpp`.  
+   Definitions of the following Python-callable C++ functions:  
+   - `pyQfImpliedVol`: implied BS vol via Newton-Raphson  
+   - `pyQfHestonCall`: Heston call price  
+   - `pyQfHestonVol` : Heston implied vol  
+   - `pyQfHestonCalibrate`: Heston calibration  
+   - `pyQfVSCreate`, `pyQfVSImpliedVol`, `pyQfVSTotalVar`, `pyQfVSAtmVol`: vol surface queries
+
+7. In files `pyqflib/pymodule.cpp` and `pyqflib/qflib/__init__.py`.  
+   Registered the following new Python callable functions:  
+   - `qf.impliedVol`: implied Black-Scholes volatility  
+   - `qf.hestonCall`:  Heston European call price  
+   - `qf.hestonVol`: Heston BS implied vol  
+   - `qf.hestonCalibrate`: Heston parameter calibration  
+   - `qf.vsCreate`: create a 2D vol surface  
+   - `qf.vsImpliedVol`: interpolated implied vol from a surface  
+   - `qf.vsTotalVar`: total variance from a surface  
+   - `qf.vsAtmVol`: ATM vol from a surface
+
+8. New example notebook `examples/Python/03_volsurface_heston.ipynb`.  
+   Demonstrates implied vol round-trip, vol surface construction and queries, Heston pricing, and Heston calibration.
+
+
 VERSION 1.1.0
 --------------
 

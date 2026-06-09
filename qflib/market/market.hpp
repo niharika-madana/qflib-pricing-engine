@@ -10,6 +10,7 @@
 #include <qflib/sptrmap.hpp>
 #include <qflib/market/yieldcurve.hpp>
 #include <qflib/market/volatilitytermstructure.hpp>
+#include <qflib/market/volsurface.hpp>
 
 BEGIN_NAMESPACE(qf)
 
@@ -29,6 +30,9 @@ public:
   /** Returns the volatility termstructure map */
   SPtrMap<VolatilityTermStructure>& volatilities() { return volmap_; }
 
+  /** Returns the volatility surface map */
+  SPtrMap<VolatilitySurface>& volSurfaces() { return vsmap_; }
+
 private:
 
   /** allow private default ctor */
@@ -43,6 +47,7 @@ private:
   // state
   SPtrMap<YieldCurve> ycmap_;
   SPtrMap<VolatilityTermStructure> volmap_;
+  SPtrMap<VolatilitySurface> vsmap_;
 };
 
 /** Free function returning the market singleton */

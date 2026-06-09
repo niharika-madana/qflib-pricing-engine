@@ -1028,3 +1028,221 @@ def qEuroBS(payofftype, spot, strike, timetoexp, discrate, growthrate, divyield,
     As strike -> 0, the call price converges to exp(-rd*T) * exp((rf - q + rho*sigmaS*sigmaQ)*T) * spot.
     """
     return pyqflib.qEuroBS(payofftype, spot, strike, timetoexp, discrate, growthrate, divyield, assetvol, fxvol, correl)
+
+###################
+# function group 5
+
+def impliedVol(payofftype, spot, strike, timetoexp, intrate, divyield, marketprice):
+    """Implied Black-Scholes volatility from a European option market price.
+
+    Parameters
+    ----------
+    payofftype : {1, -1}
+        1 for call, -1 for put
+    spot : double
+        asset spot price
+    strike : double
+        strike price
+    timetoexp : double
+        time to expiration in years
+    intrate : double
+        interest rate, p.a. and c.c.
+    divyield : double
+        asset dividend yield, p.a. and c.c.
+    marketprice : double
+        observed market price of the option
+
+    Returns
+    -------
+    double
+        implied Black-Scholes volatility
+    """
+    return pyqflib.impliedVol(payofftype, spot, strike, timetoexp, intrate, divyield, marketprice)
+
+
+def hestonCall(spot, strike, timetoexp, intrate, divyield, v0, kappa, theta, xi, rho):
+    """European call price in the Heston stochastic volatility model.
+
+    Parameters
+    ----------
+    spot : double
+        asset spot price
+    strike : double
+        strike price
+    timetoexp : double
+        time to expiration in years
+    intrate : double
+        interest rate, p.a. and c.c.
+    divyield : double
+        asset dividend yield, p.a. and c.c.
+    v0 : double
+        initial variance
+    kappa : double
+        mean-reversion speed
+    theta : double
+        long-run variance
+    xi : double
+        volatility of variance
+    rho : double
+        correlation between asset and variance Brownian motions
+
+    Returns
+    -------
+    double
+        Heston call price
+    """
+    return pyqflib.hestonCall(spot, strike, timetoexp, intrate, divyield, v0, kappa, theta, xi, rho)
+
+
+def hestonVol(payofftype, spot, strike, timetoexp, intrate, divyield, v0, kappa, theta, xi, rho):
+    """Black-Scholes implied volatility corresponding to a Heston model price.
+
+    Parameters
+    ----------
+    payofftype : {1, -1}
+        1 for call, -1 for put
+    spot : double
+        asset spot price
+    strike : double
+        strike price
+    timetoexp : double
+        time to expiration in years
+    intrate : double
+        interest rate, p.a. and c.c.
+    divyield : double
+        asset dividend yield, p.a. and c.c.
+    v0 : double
+        initial variance
+    kappa : double
+        mean-reversion speed
+    theta : double
+        long-run variance
+    xi : double
+        volatility of variance
+    rho : double
+        correlation between asset and variance Brownian motions
+
+    Returns
+    -------
+    double
+        Black-Scholes implied volatility
+    """
+    return pyqflib.hestonVol(payofftype, spot, strike, timetoexp, intrate, divyield, v0, kappa, theta, xi, rho)
+
+
+def hestonCalibrate(mktVols, strikes, mats, spot, intrate, divyield, v0, kappa, theta, xi, rho):
+    """Calibrate Heston model parameters to a market implied volatility surface.
+
+    Parameters
+    ----------
+    mktVols : 2D numpy array
+        market implied vols, shape (len(mats), len(strikes))
+    strikes : list(double) or 1D numpy array
+        option strikes
+    mats : list(double) or 1D numpy array
+        option maturities in years
+    spot : double
+        asset spot price
+    intrate : double
+        interest rate, p.a. and c.c.
+    divyield : double
+        asset dividend yield, p.a. and c.c.
+    v0 : double
+        initial guess for initial variance
+    kappa : double
+        initial guess for mean-reversion speed
+    theta : double
+        initial guess for long-run variance
+    xi : double
+        initial guess for volatility of variance
+    rho : double
+        initial guess for asset-variance correlation
+
+    Returns
+    -------
+    dictionary
+        V0, Kappa, Theta, Xi, Rho : calibrated Heston parameters
+    """
+    return pyqflib.hestonCalibrate(mktVols, strikes, mats, spot, intrate, divyield, v0, kappa, theta, xi, rho)
+
+
+def vsCreate(name, strikes, mats, vols):
+    """Create a 2D implied volatility surface.
+
+    Parameters
+    ----------
+    name : str
+        name for the vol surface
+    strikes : list(double) or 1D numpy array
+        option strikes
+    mats : list(double) or 1D numpy array
+        option maturities in years
+    vols : 2D numpy array
+        implied volatilities, shape (len(mats), len(strikes))
+
+    Returns
+    -------
+    str
+        name of the created vol surface
+    """
+    return pyqflib.vsCreate(name, strikes, mats, vols)
+
+
+def vsImpliedVol(name, strike, mat):
+    """Interpolated implied volatility from a vol surface.
+
+    Parameters
+    ----------
+    name : str
+        name of the vol surface
+    strike : double
+        option strike
+    mat : double
+        option maturity in years
+
+    Returns
+    -------
+    double
+        interpolated implied volatility
+    """
+    return pyqflib.vsImpliedVol(name, strike, mat)
+
+
+def vsTotalVar(name, strike, mat):
+    """Total variance (sigma^2 * T) from a vol surface.
+
+    Parameters
+    ----------
+    name : str
+        name of the vol surface
+    strike : double
+        option strike
+    mat : double
+        option maturity in years
+
+    Returns
+    -------
+    double
+        total variance
+    """
+    return pyqflib.vsTotalVar(name, strike, mat)
+
+
+def vsAtmVol(name, mat, fwd):
+    """ATM implied volatility from a vol surface.
+
+    Parameters
+    ----------
+    name : str
+        name of the vol surface
+    mat : double
+        option maturity in years
+    fwd : double
+        forward price (used to locate ATM strike)
+
+    Returns
+    -------
+    double
+        ATM implied volatility
+    """
+    return pyqflib.vsAtmVol(name, mat, fwd)

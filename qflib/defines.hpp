@@ -9,14 +9,14 @@
 
 constexpr const char* QF_VERSION_STRING =
 #ifdef NDEBUG
-    "1.1.0";
+    "1.2.0";
 #else
-    "1.1.0-debug";
+    "1.2.0-debug";
 #endif
 
 /** version numbers */
 constexpr int QF_VERSION_MAJOR = 1;
-constexpr int QF_VERSION_MINOR = 1;
+constexpr int QF_VERSION_MINOR = 2;
 constexpr int QF_VERSION_REVISION = 0;
 
 /** Macro for namespaces */
